@@ -34,9 +34,6 @@ from_base64 = function(data)
 	end))
 end
 
-
---So I may have acquired some "help"
-
 local owner = "LukeLor"
 local repo = "Communicated-Scripts"
 local filePath = "LoadedIDs.lua"
@@ -98,7 +95,7 @@ end
 -- Example execution:
 -- updateGitHubFile("print('Hello from Roblox Studio')", "Updated script via game event")
 
---
+--[[
 
 local body = HttpService:JSONEncode({	content = contents, message = commitMessage,})
 
@@ -164,7 +161,7 @@ local body = HttpService:JSONEncode({	content = contents, message = commitMessag
 else
 	print("Something went wrong importing file.")
 	end
-end)]]
+end)
 --BASE 64 STUFF!!
 
 		
@@ -193,3 +190,4 @@ local function fetchModuleScriptFromGitHub()
 				Url = url,
 				Method = "GET"
 			})
+]]
