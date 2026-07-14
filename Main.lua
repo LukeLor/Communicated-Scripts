@@ -1,4 +1,4 @@
---Main script here.
+--Main script here. (WIP, Sorting out)
 
 	local body = HttpService:JSONEncode({	content = contents, message = commitMessage,})
 
