@@ -93,3 +93,36 @@ local function updateGitHubFile(newContent, commitMessage, fileP)
 		warn("Failed to update: " .. response.StatusMessage .. " | " .. response.Body)
 	end
 end
+
+local function CreateFile(Content, commit, newPath)
+
+	local fileContent = tostring(Content)
+local url = string.format("https://github.com", owner, repo, newPath)
+
+local requestBody = HttpService:JSONEncode({
+    message = commit,
+    content = to_base64(fileContent)
+})
+
+local headers = {
+    ["Authorization"] = Tk,
+    ["Accept"] = "application/vnd.github+json",
+    ["Content-Type"] = "application/json"
+}
+
+local success, result = pcall(function()
+    return HttpService:RequestAsync({
+        Url = url,
+        Method = "PUT", 
+        Headers = headers,
+        Body = requestBody
+    })
+end)
+
+if success then
+    print("Yay, uploaded.")
+else
+    warn("Failed to create GitHub file:", result)
+	end
+
+end
