@@ -37,10 +37,11 @@ end
 local owner = "LukeLor"
 local repo = "Communicated-Scripts"
 local filePath = "LoggedIDs.lua"
+local sFilePath = "/IdGivenScripts"
 local Tk = "token ".. Tn
 
-local function getFileSHA()
-	local url = string.format("https://api.github.com/repos/%s/%s/contents/%s", owner, repo, filePath)
+local function getFileSHA(fileP)
+	local url = string.format("https://api.github.com/repos/%s/%s/contents/%s", owner, repo, fileP)
 	
 	local response = HttpService:RequestAsync({
 		Url = url,
@@ -58,13 +59,13 @@ local function getFileSHA()
 	return nil
 end
 
-local function updateGitHubFile(newContent, commitMessage)
-	local currentSha = getFileSHA()
+local function updateGitHubFile(newContent, commitMessage, fileP)
+	local currentSha = getFileSHA(fileP)
 	if not currentSha then 
 		return 
 	end
 	
-	local url = string.format("https://api.github.com/repos/%s/%s/contents/%s", owner, repo, filePath)
+	local url = string.format("https://api.github.com/repos/%s/%s/contents/%s", owner, repo, fileP)
 	
 	local encodedContent = HttpService:JSONEncode(newContent) 
 	
