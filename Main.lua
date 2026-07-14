@@ -35,7 +35,7 @@
 				if response.Success then
 					local data = response
 					print(data)
-					--local filecontent = data["content"]
+		end					--local filecontent = data["content"]
 					--print(url3)
 		--	game:GetService("AssetService"):
 				--	local contentid = importedfile:GetBinaryContents():GetTemporaryId()
@@ -64,7 +64,7 @@
 else
 	print("Something went wrong importing file.")
 	end
-end)
+end)]]
 --BASE 64 STUFF!!
 
 module.to_base64 = function(data)
