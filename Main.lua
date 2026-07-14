@@ -1,6 +1,70 @@
 --Main script here.
 
+	local body = HttpService:JSONEncode({	content = contents, message = commitMessage,})
 
+		local success, response = pcall(function()
+			return HttpService:RequestAsync({
+				Url = url,
+				Method = "PUT", -- Use PUT for creating/updating
+				Headers = headers,
+				Body = body
+			})
+		end)
+
+		if success then
+			local githubToken = token 
+			local owner = "RobloxFileAudioPlayerPlugin"
+			local repo = "Main"
+			local url2 = string.format("https://api.github.com/repos/%s/%s/contents/%s", owner, repo, filePath)
+			local url3 = "https://github.com/RobloxFileAudioPlayerPlugin/Main/blob/main/"..tostring(filePath).."?raw=true"
+			print("File uploaded successfully:", response)
+			local newtemp = ui.Template:Clone()
+			newtemp.Parent = ui.FavoriteIds.ScrollingFrame
+			newtemp.Name = "FETCH:"..tostring(filePath)
+			--local currentfilename = tostring(importedfile.Name.."_"..game.Players.LocalPlayer.Name..tostring(os.date("%m")..os.date("%d")..os.date("%Y")..":"..os.date("%H")..os.date("%M")..os.date("%S")))
+			newtemp.Text = string.sub(tostring(importedfile.Name),1,#importedfile.Name-3)
+			newtemp.Visible = true
+			local function fetchModuleScriptFromGitHub()
+					
+				local response = HttpService:RequestAsync({
+					Url = url3,
+					
+					Method = "GET"
+				})
+
+				if response.Success then
+					local data = response
+					print(data)
+					--local filecontent = data["content"]
+					--print(url3)
+		--	game:GetService("AssetService"):
+				--	local contentid = importedfile:GetBinaryContents():GetTemporaryId()
+					
+					music.SoundId = "rbxassetid://0"
+					music:Play()
+					--[[if data.content then
+						-- Decode the base64 content
+						--	local decodedContent = HttpService:Base64Decode(data.content)
+						--	return decodedContent
+					else
+						error("Content not found in the response")
+					end
+				else
+					error("Failed to fetch content from GitHub: " .. response.StatusCode)
+				end
+			end
+		
+			newtemp.MouseButton1Click:Connect(function()
+				fetchModuleScriptFromGitHub()
+			end)
+		else
+			warn("Error uploading file:", response)
+		end
+
+else
+	print("Something went wrong importing file.")
+	end
+end)
 --BASE 64 STUFF!!
 
 module.to_base64 = function(data)
