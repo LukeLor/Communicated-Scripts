@@ -64,19 +64,16 @@ end
 local function updateGitHubFile(newContent, commitMessage)
 	local currentSha = getFileSHA()
 	if not currentSha then 
-		warn("Failed to retrieve file SHA. Ensure the file exists.") 
 		return 
 	end
 	
-	local url = string.format("%srepos/%s/%s/contents/%s", PROXY_URL, REPO_OWNER, REPO_NAME, FILE_PATH)
+	local url = string.format("https://api.github.com/repos/%s/%s/contents/%s", owner, repo, filePath)
 	
-	-- GitHub requires the file body to be Base64 encoded
-	-- You will need a custom Base64 encoder function in your environment
 	local encodedContent = HttpService:JSONEncode(newContent) 
 	
 	local body = {
 		message = commitMessage,
-		content = encodedContent, -- Must be converted to a Base64 string first
+		content = to_base64(encodedContent),
 		sha = currentSha
 	}
 	
@@ -84,7 +81,7 @@ local function updateGitHubFile(newContent, commitMessage)
 		Url = url,
 		Method = "PUT",
 		Headers = {
-			["Authorization"] = ACCESS_TOKEN,
+			["Authorization"] = Tk,
 			["Content-Type"] = "application/json",
 			["Accept"] = "application/vnd.github+json"
 		},
