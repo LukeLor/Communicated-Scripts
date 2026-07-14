@@ -13,8 +13,8 @@
 
 		if success then
 			local githubToken = token 
-			local owner = "RobloxFileAudioPlayerPlugin"
-			local repo = "Main"
+			local owner = "LukeLor"
+			local repo = "Communicated-Scripts"
 			local url2 = string.format("https://api.github.com/repos/%s/%s/contents/%s", owner, repo, filePath)
 			local url3 = "https://github.com/RobloxFileAudioPlayerPlugin/Main/blob/main/"..tostring(filePath).."?raw=true"
 			print("File uploaded successfully:", response)
