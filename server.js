@@ -2,10 +2,10 @@ const express = require('express');
 const app = express();
 app.use(express.json());
 
-// Main memory database for rooms
+
 const sessions = {};
 
-// Automated background cleanup loop
+
 setInterval(() => {
     try {
         const now = Math.floor(Date.now() / 1000);
