@@ -140,5 +140,5 @@ local scripte = [[(loadstring(game:HttpGet("https://raw.githubusercontent.com/Lu
 
 
 
---newGitHubFile(scripte, "Testing,", "IdGivenScripts/"..tostring(ScriptId))
+newGitHubFile(scripte, "Testing,", "IdGivenScripts/"..tostring(ScriptId))
 --updateGitHubFile(scripte, "Testing,", "TestRobloxFile.lua")
