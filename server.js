@@ -19,7 +19,7 @@ setInterval(() => {
 }, 30000); 
 
 app.get('/', (req, res) => {
-    res.send('Multi-session sync server with activity tracking is online!');
+    res.send('Yay, we are running!');
 });
 
 
