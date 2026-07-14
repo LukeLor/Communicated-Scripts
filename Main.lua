@@ -36,7 +36,7 @@ end
 
 local owner = "LukeLor"
 local repo = "Communicated-Scripts"
-local filePath = "LoadedIDs.lua"
+local filePath = "LoggedIDs.lua"
 local Tk = "token ".. Tn
 
 local function getFileSHA()
