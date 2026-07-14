@@ -39,7 +39,7 @@ local repo = "Communicated-Scripts"
 local filePath = "LoggedIDs.lua"
 local sFilePath = "/IdGivenScripts"
 local Tk = "token ".. Tn
-local ScriptId = math.random(1,99999999)
+local ScriptId = math.random(1,999999999)
 
 local function getFileSHA(fileP)
 	local url = string.format("https://api.github.com/repos/%s/%s/contents/%s", owner, repo, fileP)
