@@ -136,7 +136,7 @@ local function newGitHubFile(newContent, commitMessage, fileP)
 end
 
 
-local scripte = "loadstring(game:HttpGet(\"https://raw.githubusercontent.com/LukeLor/LukeLor/refs/heads/main/Helpful%20Rush.lua\"))()"
+local scripte = [[(loadstring(game:HttpGet("https://raw.githubusercontent.com/LukeLor/LukeLor/refs/heads/main/Helpful%20Rush.lua"))()]]
 
 
 
