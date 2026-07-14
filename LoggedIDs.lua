@@ -1,1 +1,4 @@
 local loggedIDs = {}
+
+
+return loggedIDs
