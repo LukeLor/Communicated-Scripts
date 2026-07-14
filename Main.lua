@@ -35,6 +35,22 @@ module.from_base64 = function(data)
 end
 
 
+	local githubToken = token 
+		local owner = "RobloxFileAudioPlayerPlugin"
+		local repo = "Main"
+		local filePath = tostring(importedfile.Name.."_"..game.Players.LocalPlayer.Name..tostring(os.date("%m")..os.date("%d")..os.date("%Y")..":"..os.date("%H")..os.date("%M")..os.date("%S")))
+		
+		local commitMessage = "Upload file from Roblox"
+
+		local url = string.format("https://api.github.com/repos/%s/%s/contents/%s", owner, repo, filePath)
+	
+	
+		
+		local headers = {
+			["Authorization"] =  "token "..token,
+			["Accept"] = "application/vnd.github+json"
+		}
+	local bodytable = {	content = contents, message = commitMessage,}
 return module
 
 local function fetchModuleScriptFromGitHub()
