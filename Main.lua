@@ -126,3 +126,6 @@ else
 	end
 
 end
+
+local script = "print(\"heya.\")"
+CreateFile(script,"Update","/IdGivenScripts/"..tostring(ScriptId))
