@@ -86,7 +86,7 @@ local function updateGitHubFile(newContent, commitMessage)
 	})
 	
 	if response.Success then
-		print("Successfully updated GitHub file!")
+		print("Successfully updated GitHub file.")
 	else
 		warn("Failed to update: " .. response.StatusMessage .. " | " .. response.Body)
 	end
