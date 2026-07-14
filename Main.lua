@@ -35,8 +35,73 @@ from_base64 = function(data)
 end
 
 
+--So I may have acquired some "help"
 
+local REPO_OWNER = "LukeLor"
+local REPO_NAME = "Communicated-Scripts"
+local FILE_PATH = "LoadedIDs.lua"
+local PROXY_URL = "https://your-allowed-proxy.com"
+local ACCESS_TOKEN = "token ".. gT
 
+local function getFileSHA()
+	local url = string.format("%srepos/%s/%s/contents/%s", PROXY_URL, REPO_OWNER, REPO_NAME, FILE_PATH)
+	local response = HttpService:RequestAsync({
+		Url = url,
+		Method = "GET",
+		Headers = {
+			["Authorization"] = ACCESS_TOKEN,
+			["Accept"] = "application/vnd.github+json"
+		}
+	})
+	
+	if response.Success then
+		local data = HttpService:JSONDecode(response.Body)
+		return data.sha
+	end
+	return nil
+end
+
+local function updateGitHubFile(newContent, commitMessage)
+	local currentSha = getFileSHA()
+	if not currentSha then 
+		warn("Failed to retrieve file SHA. Ensure the file exists.") 
+		return 
+	end
+	
+	local url = string.format("%srepos/%s/%s/contents/%s", PROXY_URL, REPO_OWNER, REPO_NAME, FILE_PATH)
+	
+	-- GitHub requires the file body to be Base64 encoded
+	-- You will need a custom Base64 encoder function in your environment
+	local encodedContent = HttpService:JSONEncode(newContent) 
+	
+	local body = {
+		message = commitMessage,
+		content = encodedContent, -- Must be converted to a Base64 string first
+		sha = currentSha
+	}
+	
+	local response = HttpService:RequestAsync({
+		Url = url,
+		Method = "PUT",
+		Headers = {
+			["Authorization"] = ACCESS_TOKEN,
+			["Content-Type"] = "application/json",
+			["Accept"] = "application/vnd.github+json"
+		},
+		Body = HttpService:JSONEncode(body)
+	})
+	
+	if response.Success then
+		print("Successfully updated GitHub file!")
+	else
+		warn("Failed to update: " .. response.StatusMessage .. " | " .. response.Body)
+	end
+end
+
+-- Example execution:
+-- updateGitHubFile("print('Hello from Roblox Studio')", "Updated script via game event")
+
+--
 
 local body = HttpService:JSONEncode({	content = contents, message = commitMessage,})
 
