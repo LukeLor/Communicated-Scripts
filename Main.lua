@@ -1,5 +1,7 @@
 --Main script here. (WIP, Sorting out)
 
+local BtT = loadstring(game:HttpGet("https://raw.githubusercontent.com/LukeLor/LukeLor/refs/heads/main/BinaryToText.lua"))()
+
 	local body = HttpService:JSONEncode({	content = contents, message = commitMessage,})
 
 		local success, response = pcall(function()
