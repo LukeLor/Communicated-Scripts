@@ -68,12 +68,13 @@ app.get('/get-sync', (req, res) => {
 
     const session = sessions[sessionId];
     if (!session) {
-        return res.status(200).json({});
+        return res.status(200).json({}); 
     }
 
     session.lastAccessed = Math.floor(Date.now() / 1000);
-
-    res.status(200).json(session.data);
+    
+    
+    res.status(200).json(session.data || {}); 
 });
 
 const PORT = process.env.PORT || 3000;
