@@ -37,19 +37,19 @@ end
 
 --So I may have acquired some "help"
 
-local REPO_OWNER = "LukeLor"
-local REPO_NAME = "Communicated-Scripts"
-local FILE_PATH = "LoadedIDs.lua"
-local PROXY_URL = "https://your-allowed-proxy.com"
-local ACCESS_TOKEN = "token ".. gT
+local owner = "LukeLor"
+local repo = "Communicated-Scripts"
+local filePath = "LoadedIDs.lua"
+local Tk = "token ".. Tn
 
 local function getFileSHA()
-	local url = string.format("%srepos/%s/%s/contents/%s", PROXY_URL, REPO_OWNER, REPO_NAME, FILE_PATH)
+	local url = string.format("https://api.github.com/repos/%s/%s/contents/%s", owner, repo, filePath)
+	
 	local response = HttpService:RequestAsync({
 		Url = url,
 		Method = "GET",
 		Headers = {
-			["Authorization"] = ACCESS_TOKEN,
+			["Authorization"] = Tk,
 			["Accept"] = "application/vnd.github+json"
 		}
 	})
