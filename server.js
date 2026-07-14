@@ -15,3 +15,7 @@ app.get('/get-sync', (req, res) => {
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
+app.get('/', (req, res) => {
+    res.send('Sync server is online and running successfully!');
+});
