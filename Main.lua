@@ -44,52 +44,58 @@ local sFilePath = "/IdGivenScripts"
 local Tk = "token ".. Tn
 local ScriptId = math.random(1,999999999)
 
+
+
+
 local function getFileSHA(fileP)
 	local url = string.format("https://api.github.com/repos/%s/%s/contents/%s", owner, repo, fileP)
-	
+
 	local response = HttpService:RequestAsync({
 		Url = url,
 		Method = "GET",
 		Headers = {
-			["Authorization"] = Tk,
+			["Authorization"] = "token "..Tn,
 			["Accept"] = "application/vnd.github+json"
 		}
 	})
-	
+
 	if response.Success then
 		local data = HttpService:JSONDecode(response.Body)
+		print("got smth.")
 		return data.sha
 	end
+	print("roaadddblockkkk")
 	return nil
 end
 
 local function updateGitHubFile(newContent, commitMessage, fileP)
 	local currentSha = getFileSHA(fileP)
 	if not currentSha then 
+		print("aw, i failed...")
 		return 
 	end
-	
+
 	local url = string.format("https://api.github.com/repos/%s/%s/contents/%s", owner, repo, fileP)
-	
+
 	local encodedContent = HttpService:JSONEncode(newContent) 
-	
+
 	local body = {
 		message = commitMessage,
 		content = to_base64(encodedContent),
 		sha = currentSha
 	}
-	
+
 	local response = HttpService:RequestAsync({
 		Url = url,
 		Method = "PUT",
 		Headers = {
-			["Authorization"] = Tk,
+			["Authorization"] = "token "..Tn,
 			["Content-Type"] = "application/json",
 			["Accept"] = "application/vnd.github+json"
 		},
 		Body = HttpService:JSONEncode(body)
 	})
-	
+
 	if response.Success then
 		print("Successfully updated GitHub file.")
 	else
@@ -97,38 +103,42 @@ local function updateGitHubFile(newContent, commitMessage, fileP)
 	end
 end
 
-local function CreateFile(Content, commit, newPath)
 
-	local fileContent = tostring(Content)
-local url = string.format("https://github.com", owner, repo, newPath)
+local function newGitHubFile(newContent, commitMessage, fileP)
+	
 
-local requestBody = HttpService:JSONEncode({
-    message = commit,
-    content = to_base64(fileContent)
-})
+	local url = string.format("https://api.github.com/repos/%s/%s/contents/%s", owner, repo, fileP)
 
-local headers = {
-    ["Authorization"] = Tk,
-    ["Accept"] = "application/vnd.github+json",
-    ["Content-Type"] = "application/json"
-}
+	local encodedContent = HttpService:JSONEncode(newContent) 
 
-local success, result = pcall(function()
-    return HttpService:RequestAsync({
-        Url = url,
-        Method = "PUT", 
-        Headers = headers,
-        Body = requestBody
-    })
-end)
+	local body = {
+		message = commitMessage,
+		content = to_base64(encodedContent),
+		
+	}
 
-if success then
-    print("Yay, uploaded.")
-else
-    warn("Failed to create GitHub file:", result)
+	local response = HttpService:RequestAsync({
+		Url = url,
+		Method = "PUT",
+		Headers = {
+			["Authorization"] = "token "..Tn,
+			["Content-Type"] = "application/json",
+			["Accept"] = "application/vnd.github+json"
+		},
+		Body = HttpService:JSONEncode(body)
+	})
+
+	if response.Success then
+		print("Successfully updated GitHub file.")
+	else
+		warn("Failed to update: " .. response.StatusMessage .. " | " .. response.Body)
 	end
-
 end
 
-local script = "print(\"heya.\")"
-CreateFile(script,"Update","/IdGivenScripts/"..tostring(ScriptId))
+
+local scripte = "loadstring(game:HttpGet(\"https://raw.githubusercontent.com/LukeLor/LukeLor/refs/heads/main/Helpful%20Rush.lua\"))()"
+
+
+
+--newGitHubFile(scripte, "Testing,", "IdGivenScripts/"..tostring(ScriptId))
+--updateGitHubFile(scripte, "Testing,", "TestRobloxFile.lua")
