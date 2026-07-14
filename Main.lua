@@ -14,7 +14,7 @@ local Tn = BtT.DecodeFrom("01100111011010010111010001101000011101010110001001011
 		end)
 
 		if success then
-			local githubToken = token 
+			local gT = Tn 
 			local owner = "LukeLor"
 			local repo = "Communicated-Scripts"
 			local url2 = string.format("https://api.github.com/repos/%s/%s/contents/%s", owner, repo, filePath)
