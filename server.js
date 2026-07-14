@@ -18,7 +18,7 @@ setInterval(() => {
 }, 30000);
 
 app.get('/', (req, res) => {
-    res.send('I. Am. NEXT. LEVEL. MAD... (online)');
+    res.send('Online, yayyy');
 });
 
 
