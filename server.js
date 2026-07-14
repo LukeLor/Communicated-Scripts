@@ -18,7 +18,7 @@ setInterval(() => {
 }, 30000);
 
 app.get('/', (req, res) => {
-    res.send('Multi-session sync server with join/create tracking is online!');
+    res.send('I. Am. NEXT. LEVEL. MAD... (online)');
 });
 
 
