@@ -30,7 +30,7 @@ local function sendRequest(options)
     return false, nil
 end
 
-local function claimHostRole(customPayload)
+local function getHostRole(customPayload)
 	local payload = customPayload or {}
 	payload.HostName = LocalPlayer.Name
 	payload.HostId = LocalPlayer.UserId 
@@ -71,7 +71,7 @@ task.spawn(function()
 					
 						if tableData.initialized == false then
 						print("[ELECTION]: Room is empty. Claiming host position...")
-						claimHostRole()
+						getHostRole()
 						
 					elseif tableData.HostId then
 						local serverHostId = tonumber(tableData.HostId) or 0
@@ -81,12 +81,12 @@ task.spawn(function()
 						activeHostName = serverHostName
 						
 						if LocalPlayer.UserId > serverHostId then
-							print("[ELECTION]: My UserID (" .. LocalPlayer.UserId .. ") is higher than Host (" .. serverHostId .. "). Overwriting...")
+							print("Changing Host cuz UserId")
 							tableData.HostName = LocalPlayer.Name
 							tableData.HostId = LocalPlayer.UserId
 							tableData.Timestamp = os.time()
 							
-							claimHostRole(tableData)
+							getHostRole(tableData)
 						else
 							if serverHostId == LocalPlayer.UserId then
 								print("You are the Host (ID:" .. LocalPlayer.UserId .. ")")
