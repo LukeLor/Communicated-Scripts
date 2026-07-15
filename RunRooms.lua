@@ -70,7 +70,7 @@ task.spawn(function()
 				if decodeSuccess and tableData then
 					
 						if tableData.initialized == false then
-						print("[ELECTION]: Room is empty. Claiming host position...")
+						print("Oooo, room is empty, I'm getting host!!!")
 						getHostRole()
 						
 					elseif tableData.HostId then
