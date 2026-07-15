@@ -74,7 +74,7 @@ task.spawn(function()
 						getHostRole()
 						
 					elseif tableData.HostId then
-						local serverHostId = tonumber(tableData.HostId) or 0
+						local serverHostId = tonumber(tableData.HostId) or 1
 						local serverHostName = tableData.HostName or "Unknown"
 						
 						activeHostId = serverHostId
